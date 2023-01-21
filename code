@@ -1,0 +1,17 @@
+const request = require('request');
+const cheerio = require('cheerio');
+
+// URL of the website to scrape
+const url = 'https://www.example.com/lpg-prices';
+
+// Make the request
+request(url, (error, response, html) => {
+  if (!error && response.statusCode == 200) {
+    const $ = cheerio.load(html);
+
+    // Use cheerio to find the price on the page
+    const price = $('.price').text();
+
+    console.log(`The current price of LPG is ${price}`);
+  }
+});
